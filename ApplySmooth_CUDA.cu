@@ -1,3 +1,5 @@
+/*codigo CUDA utilizando memoria global*/
+
 #include "ApplySmooth_CUDA.h"
 
 __global__ void smooth_cuda(unsigned short* cuda_image, unsigned short* new_cuda_image, int rows, int cols){
