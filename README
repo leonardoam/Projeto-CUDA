@@ -1,29 +1,32 @@
 README
 
-Para a execução deste projeto disponibilizamos um Makefile que compila todos os códigos disponibilizados. Em virtude do uso das bibliotecas OpenCV, OpenMP, e OpenMPI, a compilação pode conter erros em plataformas diferentes do servidor Cosmos. As flags utilizadas foram obtidas com o comando:
+Para a execução deste projeto disponibilizamos um Makefile que compila todos os códigos disponibilizados. Em virtude do uso das bibliotecas OpenCV, OpenMP, e OpenMPI, a compilação pode conter erros em plataformas diferentes do servidor Halley (utilizado neste trabalho). As flags utilizadas foram obtidas com o comando:
 
 pkg-config --libs opencv
 pkg-config --cflags opencv
 
-A compilação deve ocorrer sem erros no servidor Cosmos. Caso ocorram erros, modifique o conteúdo do Makefile, mudando as flags para as obtidas pela execução destes comandos.
+A compilação deve ocorrer sem erros no servidor Halley. Caso ocorram erros, modifique o conteúdo do Makefile, mudando as flags para as obtidas pela execução destes comandos.
 
 Para a compilação, deve-se utilizar o comando:
 
 make
 
-Existem 2 versões do algoritmo implementado, como explicado no relatório:
+Existem 3 versões do algoritmo implementado, como explicado no relatório:
 
 ApplySmooth_Serial.cpp - algoritmo implementado sob paradigma sequencial
 ApplySmooth_MPI.cpp - algoritmo implementado sob paradigma paralelo utilizando OpenMP e OpenMPI
+ApplySmooth_CUDA.cpp  - algoritmo implementado sob paradigma paralelo utilizando CUDA
 
 Para a execução das duas versões, os comandos:
 
 ./ApplySmooth_Serial <nomedoarquivo>
-mpirun -np 11 --hostfile <hostfile> ./ApplySmooth_MPI <nomedoarquivo>
+mpirun -np <#_processos> --hostfile <hostfile> ./ApplySmooth_MPI <nomedoarquivo>
+./ApplySmooth_CUDA <nomedoarquivo>
 
 onde
 
 <nomedoarquivo> - é o arquivo de imagem ao qual se deseja aplicar o algoritmo
+<#_process> - é o número de processos em paralelo para a execução utilizando MPI
 <hostfile> - é o arquivo com os nomes dos hosts a serem utilizados pelas bibliotecas MPI
 
 O arquivo lena.jpg contém uma imagem que pode ser utilizada na execução do programa. O arquivo lena_noise.jpg apresenta a mesma imagem com ruído, para que se possa verificar a eficácia do algoritmo implementado.
