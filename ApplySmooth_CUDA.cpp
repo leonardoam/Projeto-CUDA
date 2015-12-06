@@ -1,3 +1,5 @@
+/*arquivo responsavel pela manipulacao das imagens*/
+
 #include <bits/stdc++.h>
 #include <omp.h>
 #include <opencv2/opencv.hpp>
@@ -6,8 +8,9 @@
 using namespace cv;
 using namespace std;
 
-int cols; /*nao mexa e evite usar outra variavel com esse nome*/
+int cols;
 void smooth(Mat &image){
+	/*alocacao de memoria e leitura*/
 	unsigned short *cuda_imageB = (unsigned short*) malloc (image.rows*image.cols*sizeof(unsigned short));
 	unsigned short *cuda_imageG = (unsigned short*) malloc (image.rows*image.cols*sizeof(unsigned short));
 	unsigned short *cuda_imageR = (unsigned short*) malloc (image.rows*image.cols*sizeof(unsigned short));
@@ -24,10 +27,12 @@ void smooth(Mat &image){
 		}
 	}
 
+	/*chamada do codigo CUDA linkado*/
 	smooth(cuda_imageB, image.rows, image.cols);
 	smooth(cuda_imageG, image.rows, image.cols);
 	smooth(cuda_imageR, image.rows, image.cols);
 
+	/*saida e liberacao de memoria*/
 	#pragma omp parallel
 	{
 		#pragma omp for schedule(dynamic) nowait 
