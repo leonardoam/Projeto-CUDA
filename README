@@ -15,13 +15,13 @@ Existem 3 versões do algoritmo implementado, como explicado no relatório:
 
 ApplySmooth_Serial.cpp - algoritmo implementado sob paradigma sequencial
 ApplySmooth_MPI.cpp - algoritmo implementado sob paradigma paralelo utilizando OpenMP e OpenMPI
-ApplySmooth_CUDA.cpp  - algoritmo implementado sob paradigma paralelo utilizando CUDA
+ApplySmooth_CUDA_Shared.cu  - algoritmo implementado sob paradigma paralelo utilizando CUDA utilizando memória compartilhada
 
 Para a execução das duas versões, os comandos:
 
 ./ApplySmooth_Serial <nomedoarquivo>
 mpirun -np <#_processos> --hostfile <hostfile> ./ApplySmooth_MPI <nomedoarquivo>
-./ApplySmooth_CUDA <nomedoarquivo>
+./ApplySmooth_CUDA_Shared <nomedoarquivo>
 
 onde
 
@@ -30,3 +30,5 @@ onde
 <hostfile> - é o arquivo com os nomes dos hosts a serem utilizados pelas bibliotecas MPI
 
 O arquivo lena.jpg contém uma imagem que pode ser utilizada na execução do programa. O arquivo lena_noise.jpg apresenta a mesma imagem com ruído, para que se possa verificar a eficácia do algoritmo implementado.
+
+PS: Também foi desenvolvida uma versão do algoritmo utilizando CUDA, porém apenas com memória global. Esta versão encontra-se disponível com o nome ApplySmooth_CUDA.cu
