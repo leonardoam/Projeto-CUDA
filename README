@@ -17,6 +17,8 @@ ApplySmooth_Serial.cpp - algoritmo implementado sob paradigma sequencial
 ApplySmooth_MPI.cpp - algoritmo implementado sob paradigma paralelo utilizando OpenMP e OpenMPI
 ApplySmooth_CUDA_Shared.cu  - algoritmo implementado sob paradigma paralelo utilizando CUDA utilizando memória compartilhada
 
+PS: Também foi desenvolvida uma versão do algoritmo utilizando CUDA, porém apenas com memória global. Tal versão utiliza o mesmo arquivo ApplySmooth_CUDA.cpp para a manipulação das imagens, entrada e saída - e chamada do código CUDA, contido nos arquivos de extensão .cu. Esta versão encontra-se disponível com o nome ApplySmooth_CUDA.cu
+
 Para a execução das duas versões, os comandos:
 
 ./ApplySmooth_Serial <nomedoarquivo>
@@ -30,5 +32,3 @@ onde
 <hostfile> - é o arquivo com os nomes dos hosts a serem utilizados pelas bibliotecas MPI
 
 O arquivo lena.jpg contém uma imagem que pode ser utilizada na execução do programa. O arquivo lena_noise.jpg apresenta a mesma imagem com ruído, para que se possa verificar a eficácia do algoritmo implementado.
-
-PS: Também foi desenvolvida uma versão do algoritmo utilizando CUDA, porém apenas com memória global. Esta versão encontra-se disponível com o nome ApplySmooth_CUDA.cu
